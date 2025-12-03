@@ -14,6 +14,10 @@ fun Char.isDot(): Boolean {
     return this == '.'
 }
 
+fun Char.isDotOrComma(): Boolean {
+    return this == '.' || this == ','
+}
+
 fun Char.isSpecial(): Boolean {
     return SPECIAL_CHAR_REGEX.matches("$this")
 }

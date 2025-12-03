@@ -27,3 +27,18 @@ fun String.indexesOfAll(char: Char): List<Int> {
 
     return list
 }
+
+fun String.containsAny(others: List<String>): Boolean {
+    var current = this
+
+    while(current.isNotEmpty()) {
+        for (index in others.indices) {
+            if (current.startsWith(others[index])) {
+                return true
+            }
+        }
+        current = current.drop(1)
+    }
+
+    return false
+}

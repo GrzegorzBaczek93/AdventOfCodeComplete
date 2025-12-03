@@ -142,3 +142,41 @@ fun <T> List<T>.without(index: Int): List<T> {
  */
 fun List<String>.asListOfInt(): List<List<Int>> =
     this.map { it.toList().map { it.digitToInt() } }
+
+/**
+ * Returns the number of elements in this collection matching given predicate
+ */
+fun <T> List<List<T>>.count(predicate: (T) -> Boolean): Int {
+    var result = 0
+
+    this.forEach { outer ->
+        outer.forEach { inner ->
+            if (predicate(inner)) result += 1
+        }
+    }
+
+    return result
+}
+
+/**
+ * Returns the sum of elements in this collection
+ */
+fun List<List<Int>>.sum(): Int {
+    var result = 0
+
+    this.forEach { outer ->
+        outer.forEach { inner ->
+            result += inner
+        }
+    }
+
+    return result
+}
+
+fun <T> MutableList<T>.swap(p1: Int, p2: Int) {
+    if ((p1 in this.indices).not() || (p2 in this.indices).not()) return
+
+    val temp = this[p1]
+    this[p1] = this[p2]
+    this[p2] = temp
+}
