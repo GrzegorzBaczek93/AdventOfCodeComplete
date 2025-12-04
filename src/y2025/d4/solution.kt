@@ -29,6 +29,7 @@ private fun countRollsWithRemoval(input: List<String>): Int {
             }
         }
         rolls.removeAll(rollsToRemove)
+        rollsToRemove.clear()
     }
 
     return initialSize - rolls.count()
