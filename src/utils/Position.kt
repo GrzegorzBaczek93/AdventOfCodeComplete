@@ -9,6 +9,21 @@ fun Position.nextTop(): Position = Position(this.x, this.y - 1)
 fun Position.nextBottom(): Position = Position(this.x, this.y + 1)
 fun Position.nextLeft(): Position = Position(this.x - 1, this.y)
 fun Position.nextRight(): Position = Position(this.x + 1, this.y)
+fun Position.nextTopLeft(): Position = Position(this.x - 1, this.y - 1)
+fun Position.nextTopRight(): Position = Position(this.x + 1, this.y - 1)
+fun Position.nextBottomLeft(): Position = Position(this.x - 1, this.y + 1)
+fun Position.nextBottomRight(): Position = Position(this.x + 1, this.y + 1)
+
+fun Position.getAllAdjacent(): List<Position> = listOf(
+    nextTop(),
+    nextBottom(),
+    nextRight(),
+    nextLeft(),
+    nextTopLeft(),
+    nextTopRight(),
+    nextBottomLeft(),
+    nextBottomRight(),
+)
 
 fun <T> Position.nextTopOrNull(map: List<List<T>>): Position? =
     Position(this.x, this.y - 1).takeIf { it.isInBounds(map) }

@@ -1,4 +1,4 @@
-import y2025.d1.solution
+import y2025.d4.solution
 
 fun main() {
     solution()
