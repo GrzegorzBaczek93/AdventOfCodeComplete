@@ -8,35 +8,32 @@ class ClosedRangeSet<T : Comparable<T>> : RangeSet<T, ClosedRange<T>>(ClosedRang
 
 class OpenEndRangeSet<T : Comparable<T>> : RangeSet<T, OpenEndRange<T>>(OpenEndRangeOperation())
 
+/**
+ * Implementation here is not finished at all, should be incrementally extended if needed
+ */
 abstract class RangeSet<T : Comparable<T>, R>(private val operations: RangeOperation<T, R>) {
     private val ranges: MutableList<R> = mutableListOf()
 
     fun getRanges() = ranges.toList()
 
     fun insert(range: R) {
-        if (ranges.isEmpty()) {
-            ranges.add(range)
-            return
-        }
+        val insertedIndex = add(range)
+        merge(insertedIndex)
+    }
 
-        var insertedIndex: Int = -1
-        var i = 0
-        while (i <= ranges.indices.last) {
-            if (operations.getStart(range) <= operations.getStart(ranges[i])) {
-                ranges.add(i, range)
-                insertedIndex = i
-                break
-            } else {
-                i += 1
+    private fun add(range: R): Int {
+        ranges.indices.forEach { index ->
+            if (operations.getStart(range) <= operations.getStart(ranges[index])) {
+                ranges.add(index, range)
+                return index
             }
         }
+        ranges.addLast(range)
+        return ranges.lastIndex
+    }
 
-        if (insertedIndex == -1) {
-            ranges.addLast(range)
-            return
-        }
-
-        var j = max(insertedIndex - 1, 0)
+    private fun merge(startIndex: Int) {
+        var j = max(startIndex - 1, 0)
         while (j < ranges.lastIndex) {
             if (operations.areOverlapping(ranges[j], ranges[j + 1])) {
                 ranges[j] = operations.join(ranges[j], ranges[j + 1])
