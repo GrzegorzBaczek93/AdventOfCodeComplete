@@ -26,3 +26,19 @@ fun Int.factorial(): Int {
         1
     }
 }
+
+fun <T: Comparable<T>> min(p1: T, p2: T): T {
+    return if (p1 < p2) {
+        p1
+    } else {
+        p2
+    }
+}
+
+fun <T: Comparable<T>> max(p1: T, p2: T): T {
+    return if (p1 > p2) {
+        p1
+    } else {
+        p2
+    }
+}
