@@ -3,7 +3,7 @@ package y2025.d6
 import utils.multiply
 import utils.readInput
 
-internal fun solution2() {
+internal fun part2() {
     val input = readInput(2025, 6)
 
     println("Part 2: ${doMath(input)}")
