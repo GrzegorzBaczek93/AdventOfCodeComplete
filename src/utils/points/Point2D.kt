@@ -1,17 +1,9 @@
 package utils.points
 
-import kotlin.math.abs
-
 data class Point2D(
     val x: Int,
     val y: Int,
-) {
-    companion object {
-        fun areaBetween(p1: Point2D, p2: Point2D): Long {
-            return (abs(p1.x - p2.x.toLong()) + 1) * (abs(p1.y - p2.y.toLong()) + 1)
-        }
-    }
-}
+)
 
 fun Point2D.nextTop(): Point2D = Point2D(this.x, this.y - 1)
 fun Point2D.nextBottom(): Point2D = Point2D(this.x, this.y + 1)
