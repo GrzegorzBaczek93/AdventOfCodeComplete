@@ -1,6 +1,8 @@
 package y2025.d4
 
 import utils.*
+import utils.points.Point2D
+import utils.points.getAllAdjacent
 
 fun solution() {
     val input = readInput(2025, 4)
@@ -17,7 +19,7 @@ private fun countRolls(input: List<String>): Int {
 private fun countRollsWithRemoval(input: List<String>): Int {
     var shouldSearch = true
     val rolls = parse(input = input).toMutableSet()
-    val rollsToRemove = mutableSetOf<Position>()
+    val rollsToRemove = mutableSetOf<Point2D>()
     val initialSize = rolls.size
 
     while (shouldSearch) {
@@ -35,14 +37,14 @@ private fun countRollsWithRemoval(input: List<String>): Int {
     return initialSize - rolls.count()
 }
 
-private fun parse(input: List<String>): Set<Position> {
-    val result = mutableSetOf<Position>()
-    input.walkIndexed { x, y, c -> if (c == '@') result.add(Position(x = x, y = y)) }
+private fun parse(input: List<String>): Set<Point2D> {
+    val result = mutableSetOf<Point2D>()
+    input.walkIndexed { x, y, c -> if (c == '@') result.add(Point2D(x = x, y = y)) }
     return result
 }
 
-private fun Set<Position>.isValid(position: Position): Boolean {
-    val emptyPositions = position
+private fun Set<Point2D>.isValid(point2D: Point2D): Boolean {
+    val emptyPositions = point2D
         .getAllAdjacent()
         .map { other -> this.contains(other) }
         .count { it.not() }

@@ -1,6 +1,6 @@
 package y2015.d6
 
-import utils.Position
+import utils.points.Point2D
 import utils.readInput
 import utils.sum
 import kotlin.math.max
@@ -24,8 +24,8 @@ private fun configureLights(input: List<String>): Int {
 private class Instruction private constructor() {
 
     private lateinit var modifier: Modifier
-    private lateinit var from: Position
-    private lateinit var to: Position
+    private lateinit var from: Point2D
+    private lateinit var to: Point2D
 
     constructor(raw: String) : this() {
         parse(raw)
@@ -38,9 +38,9 @@ private class Instruction private constructor() {
         to = r2.toPosition()
     }
 
-    private fun String.toPosition(): Position {
+    private fun String.toPosition(): Point2D {
         val (x, y) = filterNot { it.isWhitespace() || it.isLetter() }.split(',').map { it.toInt() }
-        return Position(x, y)
+        return Point2D(x, y)
     }
 
     fun apply(grid: MutableList<MutableList<Int>>) {
